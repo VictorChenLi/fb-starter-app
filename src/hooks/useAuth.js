@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { envVariable } from "src/utils/constant";
 
 const useAuth = () => {
   const [identity, setIdentity] = useState();
@@ -41,10 +42,10 @@ const useAuth = () => {
         "https://api.freshbooks.com/auth/oauth/token",
         {
           grant_type: "authorization_code",
-          client_id: "<Replace With Your Client ID>",
-          client_secret: "<Replace With Your Client Secret>",
+          client_id: envVariable.client_id,
+          client_secret: envVariable.client_secret,
           code: query.get("code"),
-          redirect_uri: "<Replace with your codesandbox url>",
+          redirect_uri: envVariable.redirect_uri,
         }
       );
       accessToken = response.data.access_token;
